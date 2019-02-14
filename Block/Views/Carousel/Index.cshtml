@@ -1,0 +1,99 @@
+﻿@using Block.Models
+@using EPiServer
+@using EPiServer.ServiceLocation
+@model Block.Models.Blocks.CarouselBlock
+
+
+@{
+
+    var isCarouselNotEmpty = Model.Items != null && Model.Items.FilteredItems.Any();
+    var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+    /* Make the image fully responsive */
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<div id="demo-carousel" class="carousel slide" data-ride="carousel" @Html.EditAttributes(m => m.Items)>
+    @if (isCarouselNotEmpty)
+    {
+        <ul class="carousel-indicators">
+            <li data-target="#demo-carousel" data-slide-to="0" class="active"></li>
+            @for (var i = 1; i < Model.Items.FilteredItems.Count(); i++)
+            {
+                <li data-target="#demo-carousel" data-slide-to="@i"></li>
+            }
+        </ul>
+        <div class="carousel-inner ">
+
+
+            @foreach (var carouselItem in Model.Items.FilteredItems)
+            {
+
+            <div class="carousel-item">
+
+                @{ var block = contentRepository.Get<CarouselBlockItem>(carouselItem.ContentLink);}
+                @Html.DisplayFor(m => block.BackgroundImage)
+
+                <div class="carousel-caption">
+                    <h3>First slide label</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur…</p>
+                </div>
+
+            </div>
+            }
+
+
+        </div>
+        <a class="carousel-control-prev" href="#demo-carousel" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo-carousel" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    }
+</div>
+
+ 
+
+@*<div id="demo" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://placeimg.com/640/480/any" alt="Los Angeles">
+            </div>
+            <div class="carousel-item">
+                <img src="https://placeimg.com/640/480/any" alt="Chicago">
+            </div>
+            <div class="carousel-item">
+                <img src="https://placeimg.com/640/480/any" alt="New York">
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>*@
