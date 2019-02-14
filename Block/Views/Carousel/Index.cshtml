@@ -38,22 +38,27 @@
         </ul>
         <div class="carousel-inner ">
 
-
+            @{ Boolean first = true; }
             @foreach (var carouselItem in Model.Items.FilteredItems)
             {
 
-            <div class="carousel-item active">
+                <div class="carousel-item @(first ? "active" : "")">
 
-                @{ var block = contentRepository.Get<CarouselBlockItem>(carouselItem.ContentLink);}
-                @Html.DisplayFor(m => block.BackgroundImage)
+                    @{ var block = contentRepository.Get<CarouselBlockItem>(carouselItem.ContentLink);}
+                    @Html.DisplayFor(m => block.BackgroundImage)
 
-                <div class="carousel-caption">
-                    <h3 class="left">@Html.DisplayFor(p => block.SubHeader)</h3>
-                    <p class="left">@Html.DisplayFor(p => block.Header)</p>
-                    <p class="left">@Html.DisplayFor(p => block.Text)</p>
+                    <div class="carousel-caption">
+                        <h3 class="left">@Html.DisplayFor(p => block.SubHeader)</h3>
+                        <p class="left">@Html.DisplayFor(p => block.Header)</p>
+                        <p class="left">@Html.DisplayFor(p => block.Text)</p>
+
+
+
+                    </div>
+                    <a class="btn btn-primary " href=@Html.DisplayFor(p => block.Url.OriginalString) role="button">Läs mer här</a>
                 </div>
 
-            </div>
+                first = false;
             }
 
 

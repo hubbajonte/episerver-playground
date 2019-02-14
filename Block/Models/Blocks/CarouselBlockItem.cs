@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using EPiServer;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
@@ -37,6 +38,15 @@ namespace Block.Models.Blocks
            Name = "Text",
            GroupName = SystemTabNames.Content,
            Order = 4)]
+
         public virtual XhtmlString Text { get; set; }
+
+        [CultureSpecific]
+        [Display(
+          Name = "Url",
+          GroupName = SystemTabNames.Content,
+          Order = 5)]
+        public virtual Url Url { get; set; }
+
     }
 }
