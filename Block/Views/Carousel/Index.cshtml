@@ -42,14 +42,15 @@
             @foreach (var carouselItem in Model.Items.FilteredItems)
             {
 
-            <div class="carousel-item">
+            <div class="carousel-item active">
 
                 @{ var block = contentRepository.Get<CarouselBlockItem>(carouselItem.ContentLink);}
                 @Html.DisplayFor(m => block.BackgroundImage)
 
                 <div class="carousel-caption">
-                    <h3>First slide label</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur…</p>
+                    <h3 class="left">@Html.DisplayFor(p => block.SubHeader)</h3>
+                    <p class="left">@Html.DisplayFor(p => block.Header)</p>
+                    <p class="left">@Html.DisplayFor(p => block.Text)</p>
                 </div>
 
             </div>

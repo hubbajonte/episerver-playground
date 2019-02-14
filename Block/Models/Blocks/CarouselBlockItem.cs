@@ -20,16 +20,23 @@ namespace Block.Models.Blocks
 
         [CultureSpecific]
         [Display(
-            Name = "Title",
+            Name = "Header",
             GroupName = SystemTabNames.Content,
             Order = 2)]
-        public virtual string Title { get; set; }
+        public virtual string Header { get; set; }
 
         [CultureSpecific]
         [Display(
-            Name = "Subtitle",
+            Name = "SubHeader",
             GroupName = SystemTabNames.Content,
             Order = 3)]
-        public virtual string Subtitle { get; set; }
+        public virtual string SubHeader { get; set; }
+
+        [CultureSpecific]
+        [Display(
+           Name = "Text",
+           GroupName = SystemTabNames.Content,
+           Order = 4)]
+        public virtual XhtmlString Text { get; set; }
     }
 }
